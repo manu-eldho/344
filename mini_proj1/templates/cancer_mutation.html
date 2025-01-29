@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Data Prediction Form</title>
+
+  <!-- CSS -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="./static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="./static/css2/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+
+<body>
+  <nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="#" class="brand-logo">Prediction Form</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">Help</a></li>
+        <li><a href="/logout" class="waves-effect waves-light btn orange">Logout</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="sidenav">
+        <li><a href="#">Help</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="header center orange-text">Cancer Mutation Predictor</h1>
+      <div class="row center">
+        <h5 class="header col s12 light">Predict the class based on the given data attributes</h5>
+      </div>
+
+      <div class="row">
+        <form action='/predict' method="post" class="col s12">
+          <div class="row">
+            <!-- Input fields for the dataset -->
+            <div class="input-field col s4">
+              <label for="PP"><b>PP</b></label>
+              <br>
+              <input placeholder="Enter PP value" name="PP" id="PP" type="number" step="any" class="validate" required>
+            </div>
+            <div class="input-field col s4">
+              <label for="SIFTR"><b>SIFTR</b></label>
+              <br>
+              <input placeholder="Enter SIFTR value" name="SIFTR" id="SIFTR" type="number" step="any" class="validate" required>
+            </div>
+            <div class="input-field col s4">
+              <label for="Polyphen2R"><b>Polyphen2R</b></label>
+              <br>
+              <input placeholder="Enter Polyphen2R value" name="Polyphen2R" id="Polyphen2R" type="number" step="any" class="validate" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s4">
+              <label for="Poly1hen2P"><b>Poly1hen2P</b></label>
+              <br>
+              <input placeholder="Enter Poly1hen2P value" name="Poly1hen2P" id="Poly1hen2P" type="number" step="any" class="validate" required>
+            </div>
+            <div class="input-field col s4">
+              <label for="PROVEANR"><b>PROVEANR</b></label>
+              <br>
+              <input placeholder="Enter PROVEANR value" name="PROVEANR" id="PROVEANR" type="number" step="any" class="validate" required>
+            </div>
+            <div class="input-field col s4">
+              <label for="PROVEANP"><b>PROVEANP</b></label>
+              <br>
+              <input placeholder="Enter PROVEANP value" name="PROVEANP" id="PROVEANP" type="number" step="any" class="validate" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s4">
+              <label for="CADDS"><b>CADDS</b></label>
+              <br>
+              <input placeholder="Enter CADDS value" name="CADDS" id="CADDS" type="number" step="any" class="validate" required>
+            </div>
+            <div class="input-field col s4">
+              <label for="CADDR"><b>CADDR</b></label>
+              <br>
+              <input placeholder="Enter CADDR value" name="CADDR" id="CADDR" type="number" step="any" class="validate" required>
+            </div>
+            <div class="input-field col s4">
+              <label for="CADDP"><b>CADDP</b></label>
+              <br>
+              <input placeholder="Enter CADDP value" name="CADDP" id="CADDP" type="number" step="any" class="validate" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s4">
+              <label for="fathmmS"><b>fathmmS</b></label>
+              <br>
+              <input placeholder="Enter fathmmS value" name="fathmmS" id="fathmmS" type="number" step="any" class="validate" required>
+            </div>
+            <div class="input-field col s4">
+              <label for="fathmmR"><b>fathmmR</b></label>
+              <br>
+              <input placeholder="Enter fathmmR value" name="fathmmR" id="fathmmR" type="number" step="any" class="validate" required>
+            </div>
+            <div class="input-field col s4">
+              <label for="fathmmP"><b>fathmmP</b></label>
+              <br>
+              <input placeholder="Enter fathmmP value" name="fathmmP" id="fathmmP" type="number" step="any" class="validate" required>
+            </div>
+            <div class="input-field col s4">
+              <label for="phyloP"><b>phyloP</b></label>
+              <br>
+              <input placeholder="Enter phyloP value" name="phyloP" id="phyloP" type="number" step="any" class="validate" required>
+            </div>
+            <div class="input-field col s4">
+              <label for="phyloPR"><b>phyloPR</b></label>
+              <br>
+              <input placeholder="Enter phyloPR value" name="phyloPR" id="phyloPR" type="number" step="any" class="validate" required>
+            </div>
+          </div>
+          
+          <div class="row center">
+            <button type="submit" class="btn-large waves-effect waves-light orange">Predict Probability of Cancer</button>
+          </div>
+        </form>
+      </div>
+
+      <br>
+      <!-- Display prediction result -->
+      {% if pred %}
+      <div class="row center">
+        <div class="col s12">
+          <div class="card-panel {{ 'red lighten-4' if 'risk of cancer' in pred else 'green lighten-4' }}">
+            <span class="black-text">
+              {{pred}}
+              {% if bhai %}
+              <br>
+              <strong>{{bhai}}</strong>
+              {% endif %}
+            </span>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+  <footer class="page-footer orange">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">About This Project</h5>
+          <p class="grey-text text-lighten-4">This project predicts the probability of cancer caused by the POLB gene mutation.</p>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Resources</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Documentation</a></li>
+            <li><a class="white-text" href="#!">FAQ</a></li>
+            <li><a class="white-text" href="#!">Support</a></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Contact Us</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Email</a></li>
+            <li><a class="white-text" href="#!">GitHub</a></li>
+            <li><a class="white-text" href="#!">Community</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        Developed with <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+
+  <!-- Initialize mobile sidenav -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.sidenav');
+      var instances = M.Sidenav.init(elems);
+    });
+  </script>
+</body>
+</html>
